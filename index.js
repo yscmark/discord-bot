@@ -12,18 +12,18 @@ client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
-const memberID = "646341289792765953";
-const channelID = "1062973965036945479";
+const memberID = '646341289792765953';
+const channelID = '1062973965036945479';
 
-client.on(Events.VoiceStateUpdate, async (newState, oldState) => {
+client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
     const user = await client.users.fetch(memberID);
     const channel = await client.channels.fetch(channelID);
 	if(oldState.member.id === memberID) {
-        if(oldState.channel) {
+        if(oldState.channelId === null) {
             console.log(user);
-            channel.send("<@151797733508907008>");
+            channel.send('<@151797733508907008>');
         }
-	}
+    }
 });
 
 // Log in to Discord with your client's token
